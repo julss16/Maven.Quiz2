@@ -1,5 +1,6 @@
 package com.zipcodewilmington.assessment2.part2;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,22 +16,25 @@ public class ArrayUtility {
          return m;
     }
 
+    //1--> 0|  3-->0,  (0,3),(1,4),(2,0), (3,1)(4,2)
+
     public Integer[] rotate(Integer[] array, Integer index) {
 
-        //int i= array.length;
-        Integer[] r = new Integer[array.length];
+        Integer[] temp= new Integer[array.length];
+        for (int i =0; i < array.length; i++){
 
-        for (int i = 0; i < array.length; i++) {
+            temp[i]= array[(i + index) % array.length];
 
-            for (int j = index; j < array.length - 1; j++) {
+        }
+        for (int i=0; i < array.length; i++){
+            array[i]= temp[i];
+        }
 
 
-                r[i] = array[j];
-
-            }
-
-        } return r;
+        return temp;
     }
+
+
 
     public Integer countOccurrence(Integer[] array1, Integer[] array2, Integer valueToEvaluate) {
 
@@ -39,22 +43,45 @@ public class ArrayUtility {
         System.arraycopy(array1, 0, n, 0, array1.length);
         System.arraycopy(array2, 0, n, array1.length, array2.length);
 
-        Map<Integer, Integer> map = new HashMap<>();
-       // for (valueToEvaluate: n) {
-            if (map.containsKey(valueToEvaluate)) {
-                int occurence = map.get(valueToEvaluate);
-                occurence++;
-                map.put(valueToEvaluate, occurence);
+        int counter =0;
+
+        for (int i=0; i <n.length; i++){
+
+            if (valueToEvaluate == n[i]){
+                counter++;
             }
+        }
 
 
-        return null;
+        return counter;
     }
 
 
 
     public Integer mostCommon(Integer[] array) {
 
-        return null;
+        int common = 0;
+        int tempLast =0;
+
+        for (int i=0; i < array.length; i++){
+            int c = array[i];
+            int tempCount=0;
+
+            for (int j=0; j< array.length; j++) {
+
+                if (c == array[j]) {
+                    tempCount++;
+                }
+            }
+            if (tempCount > tempLast){
+                tempLast = tempCount;
+                common= c;
+
+
+
+        }
+
+    } return common;
+
     }
 }
